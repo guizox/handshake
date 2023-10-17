@@ -1,4 +1,4 @@
-export function objectToQueryString<T>(obj: Partial<T>): string {
+export function objectToQueryString<T>(obj?: Partial<T>): string {
   const keyValuePairs = [];
 
   for (const key in obj) {

@@ -194,7 +194,7 @@ export type PlanetsApi = {
 
 export type SwapiService = {
   people: PeopleApi;
-  title: FilmsApi;
+  films: FilmsApi;
   starship: StarshipApi;
   vehicle: VehicleApi;
   species: SpeciesApi;

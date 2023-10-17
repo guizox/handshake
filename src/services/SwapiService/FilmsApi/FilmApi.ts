@@ -1,24 +1,24 @@
-import { FetchWrapper } from "@/helper/requestWrapper";
+import { FetchWrapper } from "../../../helper/requestWrapper";
 import {
   Film,
   FilmsApi,
   GetFilmPayload,
   PaginatedResource,
-} from "./Swapi.types";
-import { objectToQueryString } from "@/helper/objectToQueryString";
+} from "../Swapi.types";
+import { objectToQueryString } from "../../../helper/objectToQueryString";
 
 const API_URL = "films/";
 
-export const titleApi = (fetchWrapper: FetchWrapper) =>
+export const filmsApi = (fetchWrapper: FetchWrapper) =>
   ({
     getFilms: (options: GetFilmPayload) => {
       const queryString = objectToQueryString(options);
-      const apiUrl = `${API_URL}${queryString}`;
+      const apiUrl = `${API_URL}?${queryString}`;
 
       return fetchWrapper.get<PaginatedResource<Film>>(apiUrl);
     },
     getFilmsById: (id: number, title = "") => {
-      const apiUrl = `${API_URL}/${id}/${title ? `search=${title}` : ""}`;
+      const apiUrl = `${API_URL}${id}/${title ? `search=${title}` : ""}`;
       return fetchWrapper.get<Film>(apiUrl);
     },
   } as FilmsApi);
