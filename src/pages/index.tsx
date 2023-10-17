@@ -10,9 +10,13 @@ const Wrapper = styled.div(({ theme }) => {
 });
 
 export default function Home() {
-  const { isLoading, error, data } = useQuery("people", () =>
-    swapiService.people.getPeople()
+  const people = useQuery("people", () => swapiService.people.getPeople());
+
+  const starship = useQuery("starship", () =>
+    swapiService.starship.getStarship()
   );
+
+  const films = useQuery("title", () => swapiService.title.getFilms());
 
   return (
     <Wrapper>

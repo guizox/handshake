@@ -7,7 +7,7 @@ import {
 } from "./Swapi.types";
 import { objectToQueryString } from "@/helper/objectToQueryString";
 
-const API_URL = "people/";
+const API_URL = "films/";
 
 export const titleApi = (fetchWrapper: FetchWrapper) =>
   ({
