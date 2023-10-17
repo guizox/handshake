@@ -27,11 +27,10 @@ describe("filmsApi", () => {
     const options = {
       model: "someModel",
       title: "someTitle",
-      page: "1",
     } as GetFilmPayload;
     const api = filmsApi(mockFetchWrapper);
     api.getFilms(options);
-    const expectedUrl = "films/?model=someModel&title=someTitle&page=1";
+    const expectedUrl = "films/?search=someModel,someTitle";
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 

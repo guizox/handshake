@@ -1,7 +1,7 @@
 import { GetPeoplePayload } from "../services/SwapiService/Swapi.types";
 import { swapiService } from "../services/SwapiService/SwapiService";
 import { useQuery } from "react-query";
-import { objectToQueryString } from "../helper/objectToQueryString";
+import { objectToSearchString } from "../helper/objectToSearchString";
 import { apiCache } from "../constants/apiCache";
 
 export const useGetPeopleById = (id: number, name?: string) => {
@@ -11,7 +11,10 @@ export const useGetPeopleById = (id: number, name?: string) => {
 };
 
 export const useGetPeople = (options?: GetPeoplePayload | undefined) => {
-  const queryString = objectToQueryString({ api: apiCache.people, ...options });
+  const queryString = objectToSearchString({
+    api: apiCache.people,
+    ...options,
+  });
 
   return useQuery(queryString, () => swapiService.people.getPeople(options));
 };

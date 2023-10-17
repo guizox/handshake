@@ -122,7 +122,7 @@ export interface PaginationOptions {
 
 export type GetPeoplePayload = {
   name: string;
-} & PaginationOptions;
+};
 
 export type PeopleApi = {
   getPeople: (options?: GetPeoplePayload) => Promise<PaginatedResource<People>>;
@@ -131,7 +131,7 @@ export type PeopleApi = {
 
 export type GetFilmPayload = {
   title: string;
-} & PaginationOptions;
+};
 
 export type FilmsApi = {
   getFilms: (options?: GetFilmPayload) => Promise<PaginatedResource<Film>>;
@@ -141,7 +141,7 @@ export type FilmsApi = {
 export type GetStarshipPayload = {
   name: string;
   model: string;
-} & PaginationOptions;
+};
 
 export type StarshipApi = {
   getStarship: (
@@ -157,7 +157,7 @@ export type StarshipApi = {
 export type GetVehiclePayload = {
   name: string;
   model: string;
-} & PaginationOptions;
+};
 
 export type VehicleApi = {
   getVehicles: (
@@ -172,7 +172,7 @@ export type VehicleApi = {
 
 export type GetSpeciesPayload = {
   name: string;
-} & PaginationOptions;
+};
 
 export type SpeciesApi = {
   getSpecies: (
@@ -183,7 +183,7 @@ export type SpeciesApi = {
 
 export type GetPlanetPayload = {
   name: string;
-} & PaginationOptions;
+};
 
 export type PlanetsApi = {
   getPlanets: (

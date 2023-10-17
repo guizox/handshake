@@ -5,14 +5,14 @@ import {
   GetFilmPayload,
   PaginatedResource,
 } from "../Swapi.types";
-import { objectToQueryString } from "../../../helper/objectToQueryString";
+import { objectToSearchString } from "../../../helper/objectToSearchString";
 
 const API_URL = "films/";
 
 export const filmsApi = (fetchWrapper: FetchWrapper) =>
   ({
     getFilms: (options: GetFilmPayload) => {
-      const queryString = objectToQueryString(options);
+      const queryString = objectToSearchString(options);
       const apiUrl = `${API_URL}?${queryString}`;
 
       return fetchWrapper.get<PaginatedResource<Film>>(apiUrl);

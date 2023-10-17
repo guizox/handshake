@@ -23,11 +23,10 @@ describe("vehicleApi", () => {
     const options = {
       model: "someModel",
       name: "someName",
-      page: "1",
     } as GetVehiclePayload;
     const api = vehicleApi(mockFetchWrapper);
     api.getVehicles(options);
-    const expectedUrl = "vehicles/?model=someModel&name=someName&page=1";
+    const expectedUrl = "vehicles/?search=someModel,someName";
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 

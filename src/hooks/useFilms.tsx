@@ -1,7 +1,7 @@
 import { GetFilmPayload } from "../services/SwapiService/Swapi.types";
 import { swapiService } from "../services/SwapiService/SwapiService";
 import { useQuery } from "react-query";
-import { objectToQueryString } from "../helper/objectToQueryString";
+import { objectToSearchString } from "../helper/objectToSearchString";
 import { apiCache } from "../constants/apiCache";
 
 export const useGetFilmsById = (id: number, title?: string) => {
@@ -11,7 +11,7 @@ export const useGetFilmsById = (id: number, title?: string) => {
 };
 
 export const useGetFilms = (options?: GetFilmPayload | undefined) => {
-  const queryString = objectToQueryString({ api: apiCache.films, ...options });
+  const queryString = objectToSearchString({ api: apiCache.films, ...options });
 
   return useQuery(queryString, () => swapiService.films.getFilms(options));
 };

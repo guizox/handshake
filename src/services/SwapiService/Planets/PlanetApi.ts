@@ -1,4 +1,4 @@
-import { objectToQueryString } from "../../../helper/objectToQueryString";
+import { objectToSearchString } from "../../../helper/objectToSearchString";
 import { FetchWrapper } from "../../../helper/requestWrapper";
 import {
   GetPlanetPayload,
@@ -12,7 +12,7 @@ const API_URL = "planets/";
 export const planetApi = (fetchWrapper: FetchWrapper) =>
   ({
     getPlanets: (options: GetPlanetPayload) => {
-      const queryString = objectToQueryString(options);
+      const queryString = objectToSearchString(options);
       const apiUrl = `${API_URL}?${queryString}`;
 
       return fetchWrapper.get<PaginatedResource<Planet>>(apiUrl);

@@ -27,11 +27,10 @@ describe("planetApi", () => {
     const options = {
       model: "someModel",
       name: "someName",
-      page: "1",
     } as GetPlanetPayload;
     const api = planetApi(mockFetchWrapper);
     api.getPlanets(options);
-    const expectedUrl = "planets/?model=someModel&name=someName&page=1";
+    const expectedUrl = "planets/?search=someModel,someName";
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 

@@ -1,7 +1,7 @@
 import { GetPlanetPayload } from "../services/SwapiService/Swapi.types";
 import { swapiService } from "../services/SwapiService/SwapiService";
 import { useQuery } from "react-query";
-import { objectToQueryString } from "../helper/objectToQueryString";
+import { objectToSearchString } from "../helper/objectToSearchString";
 import { apiCache } from "../constants/apiCache";
 
 export const useGetSpeciesById = (id: number, name?: string) => {
@@ -11,7 +11,7 @@ export const useGetSpeciesById = (id: number, name?: string) => {
 };
 
 export const useGetSpecies = (options?: GetPlanetPayload | undefined) => {
-  const queryString = objectToQueryString({
+  const queryString = objectToSearchString({
     api: apiCache.species,
     ...options,
   });

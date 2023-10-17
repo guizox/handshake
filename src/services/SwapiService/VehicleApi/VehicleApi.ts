@@ -1,4 +1,4 @@
-import { objectToQueryString } from "../../../helper/objectToQueryString";
+import { objectToSearchString } from "../../../helper/objectToSearchString";
 import { FetchWrapper } from "../../../helper/requestWrapper";
 import {
   GetVehiclePayload,
@@ -12,7 +12,7 @@ const API_URL = "vehicles/";
 export const vehicleApi = (fetchWrapper: FetchWrapper) =>
   ({
     getVehicles: (options: GetVehiclePayload) => {
-      const queryString = objectToQueryString(options);
+      const queryString = objectToSearchString(options);
       const apiUrl = `${API_URL}?${queryString}`;
 
       return fetchWrapper.get<PaginatedResource<Vehicle>>(apiUrl);

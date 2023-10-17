@@ -27,11 +27,10 @@ describe("peopleApi", () => {
     const options = {
       model: "someModel",
       name: "someName",
-      page: "1",
     } as GetPeoplePayload;
     const api = peopleApi(mockFetchWrapper);
     api.getPeople(options);
-    const expectedUrl = "people/?model=someModel&name=someName&page=1";
+    const expectedUrl = "people/?search=someModel,someName";
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
