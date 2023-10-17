@@ -41,13 +41,25 @@ export interface PaginatedResource<T> {
   results: T[];
 }
 
+export interface PaginationOptions {
+  page: string;
+}
+
+export type GetPeoplePayload = {
+  name: string;
+} & PaginationOptions;
+
 export type PeopleApi = {
-  getPeople: (name?: string) => Promise<PaginatedResource<People>>;
+  getPeople: (options?: GetPeoplePayload) => Promise<PaginatedResource<People>>;
   getPeopleById: (id: number, name?: string) => Promise<People>;
 };
 
+export type GetFilmPayload = {
+  title: string;
+} & PaginationOptions;
+
 export type FilmsApi = {
-  getFilms: (title?: string) => Promise<PaginatedResource<Film>>;
+  getFilms: (options?: GetFilmPayload) => Promise<PaginatedResource<Film>>;
   getFilmsById: (id: number, title?: string) => Promise<Film>;
 };
 

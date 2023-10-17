@@ -1,12 +1,19 @@
-import { FetchWrapper } from "@/helper/requestWrapper";
-import { PaginatedResource, People, PeopleApi } from "./Swapi.types";
+import { objectToQueryString } from "@/helper/objectToQueryString";
+import { FetchWrapper } from "../../helper/requestWrapper";
+import {
+  GetPeoplePayload,
+  PaginatedResource,
+  People,
+  PeopleApi,
+} from "./Swapi.types";
 
 const API_URL = "people/";
 
 export const peopleApi = (fetchWrapper: FetchWrapper) =>
   ({
-    getPeople: (name = "") => {
-      const apiUrl = `${API_URL}${name ? `?search=${name}` : ""}`;
+    getPeople: (options: GetPeoplePayload) => {
+      const queryString = objectToQueryString(options);
+      const apiUrl = `${API_URL}${queryString}`;
 
       return fetchWrapper.get<PaginatedResource<People>>(apiUrl);
     },
