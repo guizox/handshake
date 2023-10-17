@@ -1,15 +1,20 @@
+import { Button } from "../components/atoms/Button/Button";
 import styled, { css } from "styled-components";
 
 const Wrapper = styled.div(({ theme }) => {
-  return css`
-    background: ${theme.palette.primary.main};
-
-    ${theme.mediaQueries.fromDesktopSmall(css`
-      background: ${theme.palette.secondary.main};
-    `)}
-  `;
+  return css``;
 });
 
 export default function Home() {
-  return <Wrapper>home page</Wrapper>;
+  return (
+    <Wrapper>
+      <Button variant="primary" testId="primary-button">
+        click me
+      </Button>
+
+      <Button variant="secondary" testId="secondary-button">
+        click me
+      </Button>
+    </Wrapper>
+  );
 }
