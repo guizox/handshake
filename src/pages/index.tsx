@@ -50,9 +50,16 @@ const Home = () => {
         click me
       </Button>
 
-      <Button variant="secondary" testId="secondary-button" onClick={() => {}}>
+      <Button
+        variant="secondary"
+        testId="secondary-button"
+        onClick={() => {
+          alert(`nothing happens, it's just to show a secondary button :D`);
+        }}
+      >
         click me
       </Button>
+
       {filmsData?.isLoading ? (
         <p>loading...</p>
       ) : (
