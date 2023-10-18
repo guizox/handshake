@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { objectToSearchString } from "../helper/objectToSearchString";
 import { apiCache } from "../constants/apiCache";
 
-export const useGetVehicleById = (
+export const useFetchVehicleById = (
   id: number,
   name?: string,
   model?: string
@@ -14,7 +14,7 @@ export const useGetVehicleById = (
   );
 };
 
-export const useGetVehicles = (options?: GetVehiclePayload | undefined) => {
+export const useFetchVehicles = (options?: GetVehiclePayload | undefined) => {
   const queryString = objectToSearchString({
     api: apiCache.vehicles,
     ...options,

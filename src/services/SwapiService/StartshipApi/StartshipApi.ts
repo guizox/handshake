@@ -12,25 +12,18 @@ const API_URL = "starships/";
 export const starshipApi = (fetchWrapper: FetchWrapper) =>
   ({
     getStarship: (options: GetStarshipPayload) => {
-      const queryString = objectToSearchString(options);
-      const apiUrl = `${API_URL}?${queryString}`;
+      const searchString = objectToSearchString(options);
+      const apiUrl = `${API_URL}${
+        searchString.length ? `?${searchString}` : ""
+      }`;
 
       return fetchWrapper.get<PaginatedResource<Starship>>(apiUrl);
     },
     getStartshipById: (id, name, model) => {
-      const search = [];
-      if (name) {
-        search.push(name);
-      }
-
-      if (model) {
-        search.push(model);
-      }
-
-      const searchString = search.length ? `search=${search.toString()}` : "";
-
-      const apiUrl = `${API_URL}${id}/${searchString}`;
-
+      const searchString = objectToSearchString({ name, model });
+      const apiUrl = `${API_URL}${id}/${
+        searchString.length ? `?${searchString}` : ""
+      }`;
       return fetchWrapper.get<Starship>(apiUrl);
     },
   } as StarshipApi);

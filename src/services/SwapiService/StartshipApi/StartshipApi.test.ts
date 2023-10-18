@@ -19,7 +19,7 @@ describe("starshipApi", () => {
     const options = {} as GetStarshipPayload;
     const api = starshipApi(mockFetchWrapper);
     api.getStarship(options);
-    const expectedUrl = "starships/?";
+    const expectedUrl = "starships/";
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
@@ -40,7 +40,7 @@ describe("starshipApi", () => {
     const model = "SomeModel";
     const api = starshipApi(mockFetchWrapper);
     api.getStartshipById(id, name, model);
-    const expectedUrl = `starships/${id}/search=${name},${model}`;
+    const expectedUrl = `starships/${id}/?search=${name},${model}`;
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 

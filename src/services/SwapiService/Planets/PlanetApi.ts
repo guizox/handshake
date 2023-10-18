@@ -12,13 +12,18 @@ const API_URL = "planets/";
 export const planetApi = (fetchWrapper: FetchWrapper) =>
   ({
     getPlanets: (options: GetPlanetPayload) => {
-      const queryString = objectToSearchString(options);
-      const apiUrl = `${API_URL}?${queryString}`;
+      const searchString = objectToSearchString(options);
+      const apiUrl = `${API_URL}${
+        searchString.length ? `?${searchString}` : ""
+      }`;
 
       return fetchWrapper.get<PaginatedResource<Planet>>(apiUrl);
     },
     getPlanetById: (id: number, name = "") => {
-      const apiUrl = `${API_URL}${id}/${name ? `search=${name}` : ""}`;
+      const searchString = objectToSearchString({ name });
+      const apiUrl = `${API_URL}${id}/${
+        searchString.length ? `?${searchString}` : ""
+      }`;
       return fetchWrapper.get<Planet>(apiUrl);
     },
   } as PlanetsApi);

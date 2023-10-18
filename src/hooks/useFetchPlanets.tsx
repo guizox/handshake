@@ -4,13 +4,13 @@ import { useQuery } from "react-query";
 import { objectToSearchString } from "../helper/objectToSearchString";
 import { apiCache } from "../constants/apiCache";
 
-export const useGetPlanetById = (id: number, name?: string) => {
+export const useFetchPlanetById = (id: number, name?: string) => {
   return useQuery(`${apiCache.planets}-${id}-${name}`, () =>
     swapiService.planets.getPlanetById(id, name)
   );
 };
 
-export const useGetPlanets = (options?: GetPlanetPayload | undefined) => {
+export const useFetchPlanets = (options?: GetPlanetPayload | undefined) => {
   const queryString = objectToSearchString({
     api: apiCache.planets,
     ...options,

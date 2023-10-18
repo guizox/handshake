@@ -1,9 +1,21 @@
 import { objectToSearchString } from "./objectToSearchString";
 
 describe("objectToSearchString", () => {
+  it("should set initialString with page when page is passed", () => {
+    const result = objectToSearchString({ page: 1 });
+    expect(result).toBe(`page=1`);
+  });
+
+  it("should set use page and other parameter", () => {
+    const result = objectToSearchString({ page: 1, test: "testParameter" });
+    expect(result).toBe(`page=1&search=testParameter`);
+  });
+
   it("should return an empty string for an empty object", () => {
     const result = objectToSearchString({});
     expect(result).toBe("");
+    const newResult = objectToSearchString();
+    expect(newResult).toBe("");
   });
 
   it("should create a search string for a non-empty object", () => {

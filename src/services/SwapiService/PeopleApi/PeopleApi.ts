@@ -12,13 +12,18 @@ const API_URL = "people/";
 export const peopleApi = (fetchWrapper: FetchWrapper) =>
   ({
     getPeople: (options: GetPeoplePayload) => {
-      const queryString = objectToSearchString(options);
-      const apiUrl = `${API_URL}?${queryString}`;
+      const searchString = objectToSearchString(options);
+      const apiUrl = `${API_URL}${
+        searchString.length ? `?${searchString}` : ""
+      }`;
 
       return fetchWrapper.get<PaginatedResource<People>>(apiUrl);
     },
     getPeopleById: (id: number, name = "") => {
-      const apiUrl = `${API_URL}${id}/${name ? `search=${name}` : ""}`;
+      const searchString = objectToSearchString({ name });
+      const apiUrl = `${API_URL}${id}/${
+        searchString.length ? `?${searchString}` : ""
+      }`;
       return fetchWrapper.get<People>(apiUrl);
     },
   } as PeopleApi);

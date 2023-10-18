@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { objectToSearchString } from "../helper/objectToSearchString";
 import { apiCache } from "../constants/apiCache";
 
-export const useGetStartshipsById = (
+export const useFetchStarshipsById = (
   id: number,
   name?: string,
   model?: string
@@ -14,7 +14,7 @@ export const useGetStartshipsById = (
   );
 };
 
-export const useGetStarships = (options?: GetStarshipPayload | undefined) => {
+export const useFetchStarships = (options?: GetStarshipPayload | undefined) => {
   const queryString = objectToSearchString({
     api: apiCache.startships,
     ...options,

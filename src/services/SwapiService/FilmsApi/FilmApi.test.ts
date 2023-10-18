@@ -19,7 +19,7 @@ describe("filmsApi", () => {
     const options = {} as GetFilmPayload;
     const api = filmsApi(mockFetchWrapper);
     api.getFilms(options);
-    const expectedUrl = "films/?";
+    const expectedUrl = "films/";
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
@@ -39,7 +39,7 @@ describe("filmsApi", () => {
     const title = "SomeTitle";
     const api = filmsApi(mockFetchWrapper);
     api.getFilmsById(id, title);
-    const expectedUrl = `films/${id}/search=${title}`;
+    const expectedUrl = `films/${id}/?search=${title}`;
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 

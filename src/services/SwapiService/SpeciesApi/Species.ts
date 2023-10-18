@@ -12,13 +12,18 @@ const API_URL = "species/";
 export const speciesApi = (fetchWrapper: FetchWrapper) =>
   ({
     getSpecies: (options: GetSpeciesPayload) => {
-      const queryString = objectToSearchString(options);
-      const apiUrl = `${API_URL}?${queryString}`;
+      const searchString = objectToSearchString(options);
+      const apiUrl = `${API_URL}${
+        searchString.length ? `?${searchString}` : ""
+      }`;
 
       return fetchWrapper.get<PaginatedResource<Species>>(apiUrl);
     },
     getSpeciesById: (id: number, name = "") => {
-      const apiUrl = `${API_URL}${id}/${name ? `search=${name}` : ""}`;
+      const searchString = objectToSearchString({ name });
+      const apiUrl = `${API_URL}${id}/${
+        searchString.length ? `?${searchString}` : ""
+      }`;
       return fetchWrapper.get<Species>(apiUrl);
     },
   } as SpeciesApi);

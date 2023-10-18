@@ -19,7 +19,7 @@ describe("speciesApi", () => {
     const options = {} as GetSpeciesPayload;
     const api = speciesApi(mockFetchWrapper);
     api.getSpecies(options);
-    const expectedUrl = "species/?";
+    const expectedUrl = "species/";
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
@@ -39,7 +39,7 @@ describe("speciesApi", () => {
     const name = "SomeName";
     const api = speciesApi(mockFetchWrapper);
     api.getSpeciesById(id, name);
-    const expectedUrl = `species/${id}/search=${name}`;
+    const expectedUrl = `species/${id}/?search=${name}`;
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 

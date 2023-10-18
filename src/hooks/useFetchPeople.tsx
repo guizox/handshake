@@ -4,13 +4,13 @@ import { useQuery } from "react-query";
 import { objectToSearchString } from "../helper/objectToSearchString";
 import { apiCache } from "../constants/apiCache";
 
-export const useGetPeopleById = (id: number, name?: string) => {
+export const useFetchPeopleById = (id: number, name?: string) => {
   return useQuery(`${apiCache.people}-${id}-${name}`, () =>
     swapiService.people.getPeopleById(id, name)
   );
 };
 
-export const useGetPeople = (options?: GetPeoplePayload | undefined) => {
+export const useFetchPeople = (options?: GetPeoplePayload | undefined) => {
   const queryString = objectToSearchString({
     api: apiCache.people,
     ...options,

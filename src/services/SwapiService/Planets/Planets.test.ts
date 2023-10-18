@@ -19,7 +19,7 @@ describe("planetApi", () => {
     const options = {} as GetPlanetPayload;
     const api = planetApi(mockFetchWrapper);
     api.getPlanets(options);
-    const expectedUrl = "planets/?";
+    const expectedUrl = "planets/";
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
@@ -39,7 +39,7 @@ describe("planetApi", () => {
     const name = "SomeName";
     const api = planetApi(mockFetchWrapper);
     api.getPlanetById(id, name);
-    const expectedUrl = `planets/${id}/search=${name}`;
+    const expectedUrl = `planets/${id}/?search=${name}`;
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 

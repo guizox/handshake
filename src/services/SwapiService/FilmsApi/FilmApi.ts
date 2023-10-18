@@ -12,13 +12,18 @@ const API_URL = "films/";
 export const filmsApi = (fetchWrapper: FetchWrapper) =>
   ({
     getFilms: (options: GetFilmPayload) => {
-      const queryString = objectToSearchString(options);
-      const apiUrl = `${API_URL}?${queryString}`;
+      const searchString = objectToSearchString(options);
+      const apiUrl = `${API_URL}${
+        searchString.length ? `?${searchString}` : ""
+      }`;
 
       return fetchWrapper.get<PaginatedResource<Film>>(apiUrl);
     },
     getFilmsById: (id: number, title = "") => {
-      const apiUrl = `${API_URL}${id}/${title ? `search=${title}` : ""}`;
+      const searchString = objectToSearchString({ title });
+      const apiUrl = `${API_URL}${id}/${
+        searchString.length ? `?${searchString}` : ""
+      }`;
       return fetchWrapper.get<Film>(apiUrl);
     },
   } as FilmsApi);

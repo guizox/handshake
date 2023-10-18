@@ -12,24 +12,19 @@ const API_URL = "vehicles/";
 export const vehicleApi = (fetchWrapper: FetchWrapper) =>
   ({
     getVehicles: (options: GetVehiclePayload) => {
-      const queryString = objectToSearchString(options);
-      const apiUrl = `${API_URL}?${queryString}`;
+      const searchString = objectToSearchString(options);
+      const apiUrl = `${API_URL}${
+        searchString.length ? `?${searchString}` : ""
+      }`;
 
       return fetchWrapper.get<PaginatedResource<Vehicle>>(apiUrl);
     },
     getVehiclesById: (id: number, name: string, model: string) => {
-      const search = [];
-      if (name) {
-        search.push(name);
-      }
+      const searchString = objectToSearchString({ name, model });
 
-      if (model) {
-        search.push(model);
-      }
-
-      const searchString = search.length ? `search=${search.toString()}` : "";
-
-      const apiUrl = `${API_URL}${id}/${searchString}`;
+      const apiUrl = `${API_URL}${id}/${
+        searchString.length ? `?${searchString}` : ""
+      }`;
 
       return fetchWrapper.get<Vehicle>(apiUrl);
     },

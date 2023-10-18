@@ -15,7 +15,7 @@ describe("vehicleApi", () => {
     const options = {} as GetVehiclePayload;
     const api = vehicleApi(mockFetchWrapper);
     api.getVehicles(options);
-    const expectedUrl = "vehicles/?";
+    const expectedUrl = "vehicles/";
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
@@ -36,7 +36,7 @@ describe("vehicleApi", () => {
     const model = "SomeModel";
     const api = vehicleApi(mockFetchWrapper);
     api.getVehiclesById(id, name, model);
-    const expectedUrl = `vehicles/${id}/search=${name},${model}`;
+    const expectedUrl = `vehicles/${id}/?search=${name},${model}`;
     expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
