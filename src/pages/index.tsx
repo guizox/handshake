@@ -29,11 +29,6 @@ const Home = () => {
 
   return (
     <Wrapper>
-      <meta
-        name="format-detection"
-        content="telephone=no, date=no, email=no, address=no"
-      />
-
       <Input
         testId="search"
         placeholder="placeholder text"
