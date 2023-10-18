@@ -1,5 +1,5 @@
 import { objectToSearchString } from "../../../helper/objectToSearchString";
-import { FetchWrapper } from "../../../helper/requestWrapper";
+import { RequestWrapper } from "../../../helper/requestWrapper";
 import {
   GetSpeciesPayload,
   PaginatedResource,
@@ -9,7 +9,7 @@ import {
 
 const API_URL = "species/";
 
-export const speciesApi = (fetchWrapper: FetchWrapper) =>
+export const speciesApi = (requestWrapper: RequestWrapper) =>
   ({
     getSpecies: (options: GetSpeciesPayload) => {
       const searchString = objectToSearchString(options);
@@ -17,13 +17,13 @@ export const speciesApi = (fetchWrapper: FetchWrapper) =>
         searchString.length ? `?${searchString}` : ""
       }`;
 
-      return fetchWrapper.get<PaginatedResource<Species>>(apiUrl);
+      return requestWrapper.get<PaginatedResource<Species>>(apiUrl);
     },
     getSpeciesById: (id: number, name = "") => {
       const searchString = objectToSearchString({ name });
       const apiUrl = `${API_URL}${id}/${
         searchString.length ? `?${searchString}` : ""
       }`;
-      return fetchWrapper.get<Species>(apiUrl);
+      return requestWrapper.get<Species>(apiUrl);
     },
   } as SpeciesApi);

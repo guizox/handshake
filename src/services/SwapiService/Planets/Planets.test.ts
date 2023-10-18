@@ -1,53 +1,53 @@
 import { planetApi } from "./PlanetApi";
-import { FetchWrapper } from "../../../helper/requestWrapper";
+import { RequestWrapper } from "../../../helper/requestWrapper";
 import { GetPlanetPayload } from "../Swapi.types";
 
 jest.mock("../../../helper/requestWrapper", () => ({
-  FetchWrapper: jest.fn(),
+  RequestWrapper: jest.fn(),
 }));
 
 describe("planetApi", () => {
-  let mockFetchWrapper: FetchWrapper;
+  let mockRequestWrapper: RequestWrapper;
 
   beforeEach(() => {
-    mockFetchWrapper = {
+    mockRequestWrapper = {
       get: jest.fn(),
-    } as unknown as FetchWrapper;
+    } as unknown as RequestWrapper;
   });
 
-  it("should call fetchWrapper.get for getPlanets", () => {
+  it("should call requestWrapper.get for getPlanets", () => {
     const options = {} as GetPlanetPayload;
-    const api = planetApi(mockFetchWrapper);
+    const api = planetApi(mockRequestWrapper);
     api.getPlanets(options);
     const expectedUrl = "planets/";
-    expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
+    expect(mockRequestWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
-  it("should call fetchWrapper.get for getPlanets with different options", () => {
+  it("should call requestWrapper.get for getPlanets with different options", () => {
     const options = {
       model: "someModel",
       name: "someName",
     } as GetPlanetPayload;
-    const api = planetApi(mockFetchWrapper);
+    const api = planetApi(mockRequestWrapper);
     api.getPlanets(options);
     const expectedUrl = "planets/?search=someModel,someName";
-    expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
+    expect(mockRequestWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
-  it("should call fetchWrapper.get for getPlanetById with name", () => {
+  it("should call requestWrapper.get for getPlanetById with name", () => {
     const id = 123;
     const name = "SomeName";
-    const api = planetApi(mockFetchWrapper);
+    const api = planetApi(mockRequestWrapper);
     api.getPlanetById(id, name);
     const expectedUrl = `planets/${id}/?search=${name}`;
-    expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
+    expect(mockRequestWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
-  it("should call fetchWrapper.get for getPlanetById without name", () => {
+  it("should call requestWrapper.get for getPlanetById without name", () => {
     const id = 123;
-    const api = planetApi(mockFetchWrapper);
+    const api = planetApi(mockRequestWrapper);
     api.getPlanetById(id);
     const expectedUrl = `planets/${id}/`;
-    expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
+    expect(mockRequestWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 });

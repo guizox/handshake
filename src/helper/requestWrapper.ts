@@ -1,9 +1,10 @@
+import axios from "axios";
 interface FetchOptions {
   headers?: Record<string, string>;
   body?: any;
 }
 
-export class FetchWrapper {
+export class RequestWrapper {
   private baseUrl: string;
 
   constructor(baseUrl: string) {
@@ -19,19 +20,17 @@ export class FetchWrapper {
     method: string,
     options?: FetchOptions
   ): Promise<T> {
-    const requestOptions: RequestInit = {
+    const response = await axios(url, {
       method,
       headers: options?.headers || {},
-      body: options?.body ? JSON.stringify(options.body) : undefined,
-    };
+      data: options?.body ? JSON.stringify(options.body) : undefined,
+    });
 
-    const response = await fetch(url, requestOptions);
-
-    if (!response.ok) {
+    if (!response.data) {
       throw new Error(`Fetch failed with status ${response.status}`);
     }
 
-    return response as T;
+    return response.data as T;
   }
 
   async get<T>(endpoint: string, options?: FetchOptions): Promise<T> {

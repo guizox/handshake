@@ -1,5 +1,5 @@
 import { objectToSearchString } from "../../../helper/objectToSearchString";
-import { FetchWrapper } from "../../../helper/requestWrapper";
+import { RequestWrapper } from "../../../helper/requestWrapper";
 import {
   GetPlanetPayload,
   PaginatedResource,
@@ -9,7 +9,7 @@ import {
 
 const API_URL = "planets/";
 
-export const planetApi = (fetchWrapper: FetchWrapper) =>
+export const planetApi = (requestWrapper: RequestWrapper) =>
   ({
     getPlanets: (options: GetPlanetPayload) => {
       const searchString = objectToSearchString(options);
@@ -17,13 +17,13 @@ export const planetApi = (fetchWrapper: FetchWrapper) =>
         searchString.length ? `?${searchString}` : ""
       }`;
 
-      return fetchWrapper.get<PaginatedResource<Planet>>(apiUrl);
+      return requestWrapper.get<PaginatedResource<Planet>>(apiUrl);
     },
     getPlanetById: (id: number, name = "") => {
       const searchString = objectToSearchString({ name });
       const apiUrl = `${API_URL}${id}/${
         searchString.length ? `?${searchString}` : ""
       }`;
-      return fetchWrapper.get<Planet>(apiUrl);
+      return requestWrapper.get<Planet>(apiUrl);
     },
   } as PlanetsApi);

@@ -1,5 +1,5 @@
 import { objectToSearchString } from "../../../helper/objectToSearchString";
-import { FetchWrapper } from "../../../helper/requestWrapper";
+import { RequestWrapper } from "../../../helper/requestWrapper";
 import {
   GetStarshipPayload,
   PaginatedResource,
@@ -9,7 +9,7 @@ import {
 
 const API_URL = "starships/";
 
-export const starshipApi = (fetchWrapper: FetchWrapper) =>
+export const starshipApi = (requestWrapper: RequestWrapper) =>
   ({
     getStarship: (options: GetStarshipPayload) => {
       const searchString = objectToSearchString(options);
@@ -17,13 +17,13 @@ export const starshipApi = (fetchWrapper: FetchWrapper) =>
         searchString.length ? `?${searchString}` : ""
       }`;
 
-      return fetchWrapper.get<PaginatedResource<Starship>>(apiUrl);
+      return requestWrapper.get<PaginatedResource<Starship>>(apiUrl);
     },
     getStartshipById: (id, name, model) => {
       const searchString = objectToSearchString({ name, model });
       const apiUrl = `${API_URL}${id}/${
         searchString.length ? `?${searchString}` : ""
       }`;
-      return fetchWrapper.get<Starship>(apiUrl);
+      return requestWrapper.get<Starship>(apiUrl);
     },
   } as StarshipApi);

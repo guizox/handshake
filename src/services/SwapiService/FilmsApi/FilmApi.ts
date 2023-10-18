@@ -1,4 +1,4 @@
-import { FetchWrapper } from "../../../helper/requestWrapper";
+import { RequestWrapper } from "../../../helper/requestWrapper";
 import {
   Film,
   FilmsApi,
@@ -9,7 +9,7 @@ import { objectToSearchString } from "../../../helper/objectToSearchString";
 
 const API_URL = "films/";
 
-export const filmsApi = (fetchWrapper: FetchWrapper) =>
+export const filmsApi = (requestWrapper: RequestWrapper) =>
   ({
     getFilms: (options: GetFilmPayload) => {
       const searchString = objectToSearchString(options);
@@ -17,13 +17,13 @@ export const filmsApi = (fetchWrapper: FetchWrapper) =>
         searchString.length ? `?${searchString}` : ""
       }`;
 
-      return fetchWrapper.get<PaginatedResource<Film>>(apiUrl);
+      return requestWrapper.get<PaginatedResource<Film>>(apiUrl);
     },
     getFilmsById: (id: number, title = "") => {
       const searchString = objectToSearchString({ title });
       const apiUrl = `${API_URL}${id}/${
         searchString.length ? `?${searchString}` : ""
       }`;
-      return fetchWrapper.get<Film>(apiUrl);
+      return requestWrapper.get<Film>(apiUrl);
     },
   } as FilmsApi);

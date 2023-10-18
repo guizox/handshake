@@ -1,5 +1,5 @@
 import { objectToSearchString } from "../../../helper/objectToSearchString";
-import { FetchWrapper } from "../../../helper/requestWrapper";
+import { RequestWrapper } from "../../../helper/requestWrapper";
 import {
   GetPeoplePayload,
   PaginatedResource,
@@ -9,21 +9,25 @@ import {
 
 const API_URL = "people/";
 
-export const peopleApi = (fetchWrapper: FetchWrapper) =>
+export const peopleApi = (requestWrapper: RequestWrapper) =>
   ({
-    getPeople: (options: GetPeoplePayload) => {
+    getPeople: async (options: GetPeoplePayload) => {
       const searchString = objectToSearchString(options);
       const apiUrl = `${API_URL}${
         searchString.length ? `?${searchString}` : ""
       }`;
 
-      return fetchWrapper.get<PaginatedResource<People>>(apiUrl);
+      const result = await requestWrapper.get<PaginatedResource<People>>(
+        apiUrl
+      );
+
+      return result;
     },
     getPeopleById: (id: number, name = "") => {
       const searchString = objectToSearchString({ name });
       const apiUrl = `${API_URL}${id}/${
         searchString.length ? `?${searchString}` : ""
       }`;
-      return fetchWrapper.get<People>(apiUrl);
+      return requestWrapper.get<People>(apiUrl);
     },
   } as PeopleApi);

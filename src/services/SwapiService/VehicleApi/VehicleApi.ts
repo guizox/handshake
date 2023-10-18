@@ -1,5 +1,5 @@
 import { objectToSearchString } from "../../../helper/objectToSearchString";
-import { FetchWrapper } from "../../../helper/requestWrapper";
+import { RequestWrapper } from "../../../helper/requestWrapper";
 import {
   GetVehiclePayload,
   PaginatedResource,
@@ -9,7 +9,7 @@ import {
 
 const API_URL = "vehicles/";
 
-export const vehicleApi = (fetchWrapper: FetchWrapper) =>
+export const vehicleApi = (requestWrapper: RequestWrapper) =>
   ({
     getVehicles: (options: GetVehiclePayload) => {
       const searchString = objectToSearchString(options);
@@ -17,7 +17,7 @@ export const vehicleApi = (fetchWrapper: FetchWrapper) =>
         searchString.length ? `?${searchString}` : ""
       }`;
 
-      return fetchWrapper.get<PaginatedResource<Vehicle>>(apiUrl);
+      return requestWrapper.get<PaginatedResource<Vehicle>>(apiUrl);
     },
     getVehiclesById: (id: number, name: string, model: string) => {
       const searchString = objectToSearchString({ name, model });
@@ -26,6 +26,6 @@ export const vehicleApi = (fetchWrapper: FetchWrapper) =>
         searchString.length ? `?${searchString}` : ""
       }`;
 
-      return fetchWrapper.get<Vehicle>(apiUrl);
+      return requestWrapper.get<Vehicle>(apiUrl);
     },
   } as VehicleApi);

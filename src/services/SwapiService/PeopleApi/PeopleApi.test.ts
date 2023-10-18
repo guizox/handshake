@@ -1,53 +1,53 @@
 import { peopleApi } from "./PeopleApi";
-import { FetchWrapper } from "../../../helper/requestWrapper";
+import { RequestWrapper } from "../../../helper/requestWrapper";
 import { GetPeoplePayload } from "../Swapi.types";
 
 jest.mock("../../../helper/requestWrapper", () => ({
-  FetchWrapper: jest.fn(),
+  RequestWrapper: jest.fn(),
 }));
 
 describe("peopleApi", () => {
-  let mockFetchWrapper: FetchWrapper;
+  let mockRequestWrapper: RequestWrapper;
 
   beforeEach(() => {
-    mockFetchWrapper = {
+    mockRequestWrapper = {
       get: jest.fn(),
-    } as unknown as FetchWrapper;
+    } as unknown as RequestWrapper;
   });
 
-  it("should call fetchWrapper.get for getPeople", () => {
+  it("should call requestWrapper.get for getPeople", () => {
     const options = {} as GetPeoplePayload;
-    const api = peopleApi(mockFetchWrapper);
+    const api = peopleApi(mockRequestWrapper);
     api.getPeople(options);
     const expectedUrl = "people/";
-    expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
+    expect(mockRequestWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
-  it("should call fetchWrapper.get for getPeople with different options", () => {
+  it("should call requestWrapper.get for getPeople with different options", () => {
     const options = {
       model: "someModel",
       name: "someName",
     } as GetPeoplePayload;
-    const api = peopleApi(mockFetchWrapper);
+    const api = peopleApi(mockRequestWrapper);
     api.getPeople(options);
     const expectedUrl = "people/?search=someModel,someName";
-    expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
+    expect(mockRequestWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
-  it("should call fetchWrapper.get for getPeopleById with name", () => {
+  it("should call requestWrapper.get for getPeopleById with name", () => {
     const id = 123;
     const name = "SomeName";
-    const api = peopleApi(mockFetchWrapper);
+    const api = peopleApi(mockRequestWrapper);
     api.getPeopleById(id, name);
     const expectedUrl = `people/${id}/?search=${name}`;
-    expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
+    expect(mockRequestWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 
-  it("should call fetchWrapper.get for getPeopleById without name", () => {
+  it("should call requestWrapper.get for getPeopleById without name", () => {
     const id = 123;
-    const api = peopleApi(mockFetchWrapper);
+    const api = peopleApi(mockRequestWrapper);
     api.getPeopleById(id);
     const expectedUrl = `people/${id}/`;
-    expect(mockFetchWrapper.get).toHaveBeenCalledWith(expectedUrl);
+    expect(mockRequestWrapper.get).toHaveBeenCalledWith(expectedUrl);
   });
 });
