@@ -2,6 +2,8 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../theme/index";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Navbar, NavbarProps } from "../components/molecules/Navbar/Navbar";
+import { useRouter } from "next/router";
 
 const SECOND = 1000;
 
@@ -14,9 +16,17 @@ const queryClient = new QueryClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
+        <Navbar
+          testId="navbar"
+          currentTab={
+            router.pathname.replace("/", "") as NavbarProps["currentTab"]
+          }
+        />
         <Component {...pageProps} />
       </QueryClientProvider>
     </ThemeProvider>

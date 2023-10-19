@@ -6,8 +6,37 @@ import {
   People,
   PeopleApi,
 } from "../Swapi.types";
+import { createAvatar } from "@dicebear/core";
+import { lorelei } from "@dicebear/collection";
 
 const API_URL = "people/";
+
+export type Student = {
+  major: string;
+  email: string;
+  svg: string;
+} & People;
+
+const mapStudentList = (
+  data: PaginatedResource<People>
+): PaginatedResource<Student> => {
+  return {
+    ...data,
+    results: data.results.map((item) => {
+      const avatar = createAvatar(lorelei, {
+        seed: item.name,
+      });
+
+      const svg = avatar.toString();
+      return {
+        ...item,
+        email: `${item.name}@school.edu`,
+        major: "major major",
+        svg,
+      };
+    }),
+  };
+};
 
 export const peopleApi = (requestWrapper: RequestWrapper) =>
   ({
@@ -21,7 +50,7 @@ export const peopleApi = (requestWrapper: RequestWrapper) =>
         apiUrl
       );
 
-      return result;
+      return mapStudentList(result);
     },
     getPeopleById: (id: number, name = "") => {
       const searchString = objectToSearchString({ name });

@@ -5,13 +5,15 @@ export type Palette = {
   secondary: {
     main: string;
   };
+  white: string;
 };
 
 export const palette: Palette = {
   primary: {
-    main: "red",
+    main: "#1569E0",
   },
   secondary: {
     main: "yellow",
   },
+  white: "#FFFFFF",
 };
