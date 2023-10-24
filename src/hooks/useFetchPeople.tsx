@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-debugger */
 import { GetPeoplePayload } from "../services/SwapiService/Swapi.types";
 import { swapiService } from "../services/SwapiService/SwapiService";
 import { useQuery } from "react-query";
@@ -11,7 +13,7 @@ export const useFetchPeopleById = (id: number, name?: string) => {
 };
 
 export const useFetchPeople = (options?: GetPeoplePayload | undefined) => {
-  debugger;
+  console.log("fetch people entering");
   const queryString = objectToSearchString({
     api: apiCache.people,
     ...options,

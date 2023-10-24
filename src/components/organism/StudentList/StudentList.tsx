@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import { Card } from "@/components/molecules/Card/Card";
@@ -22,17 +23,22 @@ export interface StudentListProps {
 }
 
 export const StudentList: React.FC<StudentListProps> = ({ testId }) => {
+  console.log("student");
   const initialPage = readFromStorage(LocalStorageKeys.Page, 1);
   const initialStudent = readFromStorage<Student | null>(
     LocalStorageKeys.Student,
     null
   );
 
+  console.log("read from storage");
+
   const router = useRouter();
   const [page, setPage] = React.useState(initialPage as number);
   const { data, isLoading, error } = useFetchPeople({
     page,
   });
+
+  console.log("fetch people");
 
   const [currentStudent, setCurrentStudent] = React.useState<Student | null>(
     initialStudent
@@ -43,6 +49,7 @@ export const StudentList: React.FC<StudentListProps> = ({ testId }) => {
   }, [page]);
 
   if (error) {
+    console.log(error);
     router.push("_error");
   }
 

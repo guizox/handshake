@@ -6,7 +6,6 @@ const Wrapper = styled.div(({ theme }) => {
   return css``;
 });
 const Home = () => {
-  console.log("checkin");
   return <Wrapper></Wrapper>;
 };
 
