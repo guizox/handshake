@@ -42,6 +42,7 @@ const mapStudentList = (
 export const peopleApi = (requestWrapper: RequestWrapper) =>
   ({
     getPeople: async (options: GetPeoplePayload) => {
+      debugger;
       const searchString = objectToSearchString(options);
       const apiUrl = `${API_URL}${
         searchString.length ? `?${searchString}` : ""
