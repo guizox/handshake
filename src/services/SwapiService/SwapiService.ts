@@ -7,7 +7,7 @@ import { vehicleApi } from "./VehicleApi/VehicleApi";
 import { speciesApi } from "./SpeciesApi/Species";
 import { planetApi } from "./Planets/PlanetApi";
 
-const BASE_URL = "http://swapi.dev/api";
+const BASE_URL = "https://swapi.dev/api";
 const requestWrapper = new RequestWrapper(BASE_URL);
 
 export const swapiService: SwapiService = {

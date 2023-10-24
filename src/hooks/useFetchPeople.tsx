@@ -16,5 +16,7 @@ export const useFetchPeople = (options?: GetPeoplePayload | undefined) => {
     ...options,
   });
 
-  return useQuery(queryString, () => swapiService.people.getPeople(options));
+  return useQuery(queryString, () => swapiService.people.getPeople(options), {
+    onError: (e) => console.log(e),
+  });
 };

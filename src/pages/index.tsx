@@ -4,21 +4,14 @@ import { useRouter } from "next/router";
 import React from "react";
 import styled, { css } from "styled-components";
 
-const Wrapper = styled.div(({ theme }) => {
-  return css`
-    margin: 5rem 2rem;
-    ${theme.mediaQueries.fromDesktopSmall(css`
-      margin: 12.5rem;
-    `)}
-  `;
-});
-
 const Students = () => {
-  return (
-    <Wrapper>
-      <StudentList testId="student-list" />
-    </Wrapper>
-  );
+  const router = useRouter();
+
+  React.useEffect(() => {
+    router.push("/students");
+  }, [router]);
+
+  return null;
 };
 
 export default Students;
