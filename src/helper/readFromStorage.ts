@@ -9,7 +9,9 @@ export const readFromStorage = <T>(
 ): T => {
   return (
     typeof window !== "undefined"
-      ? window.localStorage.getItem(key)
+      ? typeof window !== "undefined" && window.localStorage.getItem(key)
+        ? window.localStorage.getItem(key)
+        : initialValue
       : initialValue
   ) as T;
 };
