@@ -6,19 +6,21 @@ export const Navbar = styled.nav(
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     height: 6.75rem;
     position: sticky;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
   `
 );
 
 export const Header = styled.h1`
   color: #000;
 
-  font-feature-settings: "ss08" on, "ss10" on;
-  font-family: Inter;
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 600;
   line-height: 2.5rem;
   padding-left: 4.375rem;
+  margin: 0px;
 `;
 
 export const TabsWrapper = styled.div`
@@ -26,11 +28,13 @@ export const TabsWrapper = styled.div`
   height: 2.8125rem;
 `;
 
-export const TextItem = styled.div(
-  ({ theme }) => css`
+export interface TextItemProps {
+  isActive?: boolean;
+}
+
+export const TextItem = styled.div<TextItemProps>(
+  ({ theme, isActive }) => css`
     text-align: center;
-    font-variant-numeric: stacked-fractions;
-    font-family: Suisse Int'l;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
@@ -42,9 +46,15 @@ export const TextItem = styled.div(
     justify-content: center;
 
     &:hover {
-        background: #f0f0f0;
+      background: #f0f0f0;
     }
 
+    border-bottom: solid 2px ${isActive ? theme.palette.primary.main : "none"};
+  `
+);
 
-`
+export const ActiveTextItem = styled(TextItem)(
+  ({ theme }) => css`
+    color: ${theme.palette.primary.main};
+  `
 );

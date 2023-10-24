@@ -8,6 +8,7 @@ import {
 } from "../Swapi.types";
 import { createAvatar } from "@dicebear/core";
 import { lorelei } from "@dicebear/collection";
+import { nameToEmail } from "../../../helper/nameToEmail";
 
 const API_URL = "people/";
 
@@ -30,7 +31,7 @@ const mapStudentList = (
       const svg = avatar.toString();
       return {
         ...item,
-        email: `${item.name}@school.edu`,
+        email: nameToEmail(item.name),
         major: "major major",
         svg,
       };

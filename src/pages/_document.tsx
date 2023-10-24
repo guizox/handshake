@@ -3,14 +3,14 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="en">
-      <Head />
-      <body style={{ margin: 0 }}>
-        <StyledComponentsRegistry>
+    <StyledComponentsRegistry>
+      <Html lang="en">
+        <Head />
+        <body style={{ margin: 0, background: "#F3F3F3" }}>
           <Main />
           <NextScript />
-        </StyledComponentsRegistry>
-      </body>
-    </Html>
+        </body>
+      </Html>
+    </StyledComponentsRegistry>
   );
 }

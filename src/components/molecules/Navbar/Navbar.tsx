@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import * as S from "./Navbar.styled";
 import { useRouter } from "next/router";
@@ -14,10 +15,16 @@ export const Navbar: React.FC<NavbarProps> = ({ testId, currentTab }) => {
     <S.Navbar data-testid={testId}>
       <S.Header>Event Check in Kiosk</S.Header>
       <S.TabsWrapper>
-        <S.TextItem onClick={() => router.push("/checkin")}>
+        <S.TextItem
+          isActive={currentTab === "checkin"}
+          onClick={() => router.push("/checkin")}
+        >
           Check In
         </S.TextItem>
-        <S.TextItem onClick={() => router.push("/students")}>
+        <S.TextItem
+          isActive={currentTab === "students"}
+          onClick={() => router.push("/students")}
+        >
           Students
         </S.TextItem>
       </S.TabsWrapper>

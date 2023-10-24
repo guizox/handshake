@@ -4,6 +4,7 @@ import { theme } from "../theme/index";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Navbar, NavbarProps } from "../components/molecules/Navbar/Navbar";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const SECOND = 1000;
 
@@ -17,6 +18,15 @@ const queryClient = new QueryClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const [domLoaded, setDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
+
+  if (!domLoaded) {
+    return null;
+  }
 
   return (
     <ThemeProvider theme={theme}>
