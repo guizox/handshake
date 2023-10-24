@@ -38,6 +38,7 @@ export const StudentList: React.FC<StudentListProps> = ({ testId }) => {
     page,
   });
 
+  console.log(error);
   console.log("fetch people");
 
   const [currentStudent, setCurrentStudent] = React.useState<Student | null>(
