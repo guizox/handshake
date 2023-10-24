@@ -14,6 +14,7 @@ const Wrapper = styled.div(({ theme }) => {
 });
 
 const Students = () => {
+  console.log("student");
   return (
     <Wrapper>
       <StudentList testId="student-list" />

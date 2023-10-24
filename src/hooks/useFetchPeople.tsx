@@ -11,6 +11,7 @@ export const useFetchPeopleById = (id: number, name?: string) => {
 };
 
 export const useFetchPeople = (options?: GetPeoplePayload | undefined) => {
+  debugger;
   const queryString = objectToSearchString({
     api: apiCache.people,
     ...options,
